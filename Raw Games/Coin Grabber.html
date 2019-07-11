@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="paper.js"></script>
+    <script type="text/paperscript" canvas="canvas">
+var myb = new Path.Circle(new Point(0, 0), 10000);
+myb.fillColor = 'orange';
+var text = new PointText({
+    point: [50, 500],
+    content: 'The contents of the point text',
+    fillColor: 'black',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 25
+});
+var game_over = new PointText({
+    point: [10000, 10000],
+    content: 'The contents of the point text',
+    fillColor: 'black',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 20
+});
+var playagain = new PointText({
+    point: [400000, 500000],
+    content: 'You paused the game.To unpause the game press r.',
+    fillColor: 'black',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 40
+});
+var won=0;
+var end=0;
+var path=1;
+var power=20;
+var s=200;
+var touch=0;
+var mathx=0;
+var mathy=0;
+var sm=s-s-s;
+var ex=0;
+var ey=500;
+var mathx=x-ex;
+var mathy=y-ey;
+var prevx=0;
+var prevy=0;
+var x=ex;
+var y=ey-s-15;
+var press=0;
+var rev=0;
+var mathx1=0;
+var mathy1=0;
+var s1=30;
+var sm1=s1-s1-s1;
+var x1=500;
+var y1=400;
+var score=15000;
+var score1=0;
+var outloop=0;
+var titlescreen=1;
+var mys = new Path.Circle(new Point(ex, ey), s);
+mys.fillColor = 'red';
+var mys = new Path.Rectangle(new Point(ex-s, ey-s), s+s);
+mys.fillColor = 'red';
+var mye = new Path.Circle(new Point(x, y), 10);
+mye.fillColor = 'red';
+var mye2 = new Path.Circle(new Point(x, y), 6);
+mye2.fillColor = 'green';
+var mycoin = new Path.Circle(new Point(x1, y1), s1);
+mycoin.fillColor = 'green';
+function onFrame(event) {if(Key.isDown('b')){location.replace("Game Launcher.html")}
+if (titlescreen==1){
+if (end==0){
+prevx=x;
+prevy=y;
+y=y+4;
+if (rev==0){
+if(Key.isDown('a')){x=x-10;press=1;}
+if(Key.isDown('d')){x=x+10;press=1;}}else{
+if(Key.isDown('d')){x=x-10;press=1;}
+if(Key.isDown('a')){x=x+10;press=1}}
+if(Key.isDown('w')){y=y-10;press=1;}
+mye2.position.x = x;mye2.position.y = y;
+mye.position.x = x;
+mye.position.y = y;
+text.position.x = 400;
+text.position.y = 50;
+score=score-10;
+text.content = 'Time: '+score+' ';
+mycoin.position.x = x1;
+mycoin.position.y = y1;
+mathx=x-ex;
+mathy=y-ey;
+mathx1=x-x1;
+mathy1=y-y1;
+mye.fillColor = 'black';
+mycoin.fillColor = 'green';
+if(Key.isDown('p')){titlescreen=0;}
+if (score<0){end=1;}
+if (mathx1<s1){
+if (mathy1<s1){
+if (mathx1>sm1){
+if (mathy1>sm1){outloop=0;
+if (path==1){path=3;score1=1;x1=1000;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}
+if (path==2){path=3;score1=1;x1=1000;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}
+if (outloop==0){
+if (path==3){path=5;score1=2;y1=0;x1=0;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}
+if (path==4){path=5;score1=2;y1=0;x1=0;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}}
+if (outloop==0){
+if (path==5){y1=500;x1=500;path=7;score1=3;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}
+if (path==6){y1=500;x1=500;path=7;score1=3;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}}
+if (outloop==0){
+if (path==7){y1=200;x1=1000;path=10;score1=4;outloop=1;mycoin.position.x = x1;mycoin.position.y = y1;}
+if (path==8){y1=200;x1=1000;path=10;score1=4;outloop=1;mycoin.position.x = x1;mycoin.position.y = y1;}}
+if (outloop==0){
+if (path==10){y1=5;x1=500;path=12;score1=5;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}
+if (path==11){y1=5;x1=500;path=12;score1=5;mycoin.position.x = x1;mycoin.position.y = y1;outloop=1;}}
+if (outloop==0){
+if (path==12){y1=240;x1=100;path=14;score1=6;outloop=1;mycoin.position.x = x1;mycoin.position.y = y1;}
+if (path==13){y1=240;x1=100;path=14;score1=6;outloop=1;mycoin.position.x = x1;mycoin.position.y = y1;}}
+}}}}
+if (path==1){x1=x1+10;y1=y1+5;if (x1>1000){if (y1>200){path=2;}}}
+if (path==2){x1=x1-10;y1=y1-5;if (x1<900){if (y1<400){path=1;}}}
+if (path==3){}
+if (path==4){}
+if (path==5){}
+if (score1==6){won=1;end=1;}
+
+if (y<20){
+y=20;}
+if (y>700){
+y=700;end=1;}
+touch=0;
+rev=0;
+if (mathx<s){
+if (mathy<s){
+if (mathx>sm){
+if (mathy>sm){touch=0;
+if (s-y<s/1.9){y=y-4;
+rev=1;
+if (prevx<x){x=x-power;prevx=x;prevy=y;}
+if (prevx>x){x=x+power;prevx=x;prevy=y;}}
+if (y>sm+sm*1.2){if (y>s+s*1.2){y=y+10;rev=1;}}
+}}}
+}}else{
+game_over.position.x = 675;
+game_over.position.y = 50;
+if (won==0){
+if (score1==0){game_over.content = 'The game is over.Your time was:'+score+'.You got 1 coin.You should really try harder.';}else{
+game_over.content = 'The game is over.Your time was:'+score+'.You got '+score1+' coins.';}}else{
+game_over.content = 'You won! your time was:'+score;}
+text.content = ' ';
+mycoin.fillColor = 'blue';
+mye.fillColor = 'blue';
+myb.fillColor = 'blue';
+myb.position.x = 0;
+myb.position.y = 0;
+mys.fillColor = 'blue';
+mye2.fillColor = 'blue';
+}}else{
+playagain.position.x = 600;
+playagain.position.y = 50;
+text.content = ' ';if(Key.isDown('r')){titlescreen=1;
+playagain.position.x = 1000000000000;
+playagain.position.y = 5000000000000;}}}
+    </script>
+</head>
+<body>
+    <canvas id="canvas" resize stats hidpi="off"></canvas>
+</body>
+</html>

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="paper.js"></script>
+    <script type="text/paperscript" canvas="canvas">
+var tx=0;
+var ty=0;
+var firex=400;
+var firey=600;
+var sp=10;
+var s=20;
+var sm=s-s-s;
+var mathx=0;
+var mathy=0;
+var ex=700;
+var ey=400;
+var s1=40;
+var sm1=s-s-s;
+var mathx1=0;
+var mathy1=0;
+var ex1=600;
+var ey1=400;
+var game=0;
+var wait=0;
+var stop=0;
+var score=0;
+var speed=10;
+var bgc = new Path.Rectangle(new Point(0, 0), 100000000000);
+bgc.fillColor = 'green'
+var text = new PointText({
+    point: [50, 50],
+    content: ' ',
+    fillColor: 'black',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 30
+
+});
+var points = new PointText({
+    point: [50, 50],
+    content: 'Score:',
+    fillColor: 'black',
+    fontFamily: 'Courier New',
+    fontWeight: 'bold',
+    fontSize: 30
+
+});
+var ground = new Path.Rectangle(new Point(485, 600), 325);
+ground.fillColor = 'brown'
+var cloud = new Path.Circle(new Point(650, 0), 150);
+cloud.fillColor = 'grey'
+var water = new Path.Circle(new Point(ex, ey), s);
+water.fillColor = 'blue'
+var water1 = new Path.Circle(new Point(ex1, ey1), s);
+water1.fillColor = 'blue'
+var fire = new Path.Circle(new Point(firex, firey), sp);
+fire.fillColor = 'red'
+function onFrame(event){
+if(Key.isDown('b')){location.replace("Game Launcher.html")}
+if (game==0){
+mathx=firex-ex;
+mathy=firey-ey;
+mathx1=firex-ex1;
+mathy1=firey-ey1;
+if (mathx<s+sp-sp/.8){
+if (mathy<s+sp-sp/.8){
+if (mathx>sm-sp+sp/.8){
+if (mathy>sm-sp+sp/.8){game=1;}}}}
+if (mathx1<s1+sp-sp/.8){
+if (mathy1<s1+sp-sp/.8){
+if (mathx1>sm1-sp+sp/.8){
+if (mathy1>sm1-sp+sp/.8){game=1;}}}}
+points.content ='Score:'+score;
+fire.position.x=firex;
+fire.position.y=600;
+water.position.x=ex;
+water.position.y=ey;
+water1.position.x=ex1;
+water1.position.y=ey1;
+ey=ey+speed;
+ey1=ey1+speed;
+water.fillColor = 'blue'
+water1.fillColor = 'blue'
+score=score+1;
+if(Key.isDown('r')){location.reload();}
+if (ey>600){water.fillColor = 'green';ex=Math.floor(Math.random() *1000)+500-s+1;if (ex<500-s){ey=601;}else{if (ex>800-s){ey=601;}else{ey=100;speed=speed+0.1;}}}
+if (ey1>600){water1.fillColor = 'green';ex1=Math.floor(Math.random() *1000)+500-s1+1;if (ex1<500-s1){ey1=601;}else{if (ex1>800-s1){ey1=601;}else{ey1=100;speed=speed+0.1;}}}
+if (firex<500){firex=500;}
+if (firex>800){firex=800;}
+if(Key.isDown('a')){firex=firex-10;}
+if(Key.isDown('d')){firex=firex+10;}}else{
+text.content ='Game Over Your Score Was:'+score;
+points.content =' ';
+water.fillColor = 'green'
+water1.fillColor = 'green'
+fire.fillColor = 'green'
+ground.fillColor = 'green'
+cloud.fillColor = 'green'
+text.position.x=tx;
+text.position.y=ty;
+if (ty==300){if (tx==650){stop=1;}}
+if (stop==0){
+tx=tx+13;
+ty=ty+6;}
+}}
+    </script>
+</head>
+<body>
+    <canvas id="canvas" resize stats hidpi="off"></canvas>
+</body>
+</html>
